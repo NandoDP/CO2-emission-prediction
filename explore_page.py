@@ -2,9 +2,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+df = pd.read_csv("Fuel_Consumption.csv")
+
 def show_explore_page():
-    df = pd.read_csv("Fuel_Consumption.csv")
-    st.title("Explorer la quantité de CO2 émis des vehicules.")
+    st.title("Explorer les données du dataFrame.")
 
     st.write(
         """
@@ -15,6 +16,9 @@ def show_explore_page():
     st.dataframe(df.head())
     st.write("La description du dataFrame:")
     st.write(df.describe())
+
+def show_vizualisation_page():
+    st.title("Visualiser l'évolution de la quantité de CO2 émis")
 
     st.write(
         """

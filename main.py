@@ -1,10 +1,12 @@
 import streamlit as st
 from predict_page import show_predict_page
-from explore_page import show_explore_page
+from explore_page import show_explore_page, show_vizualisation_page
 
-page = st.sidebar.selectbox('Explorer ou prédire', ('Prédir', 'Explorer'))
+page = st.sidebar.selectbox('Prédire, explorer ou visualiser', ('Prédiction', 'Exploration', 'Visualisation'))
 
-if page == 'Prédir':
+if page == 'Prédiction':
     show_predict_page()
-else:
+elif page == 'Exploration':
     show_explore_page()
+else:
+    show_vizualisation_page()
