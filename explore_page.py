@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("Fuel_Consumption.csv")
 
 def show_explore_page():
-    st.title("Explorer les données du dataFrame.")
+    st.title("Explorer les données d’entrainement.")
 
     st.write(
         """

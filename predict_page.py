@@ -24,3 +24,14 @@ def show_predict_page():
         prediction = data.predict(input_data)
 
         st.subheader(f"La quantité de C02 émis par ce vehicule est estimer à {prediction[0]:.2f}")
+    
+    with st.sidebar.expander("A propos du model"):
+        st.markdown("""
+
+        Après avoir entrainer trois models de régressions avec les données 
+        (voir Exploration), le model de *régression linéaire de scikit-learn* 
+        semble etre légérement plus performant.
+
+        Il offre le meilleur score **R²** avec la plus petite erreur quadratique moyenne.
+
+        """)
