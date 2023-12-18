@@ -8,6 +8,16 @@ def show_explore_page():
 
     st.write(
         """
+    #### Appercu des données d'entrainement du model
+    """
+    )
+    st.write(f"Dimensions : {df.shape}")
+    st.dataframe(df.head())
+    st.write("La description du dataFrame:")
+    st.write(df.describe())
+
+    st.write(
+        """
     #### (A) Quantité CO2 émis en moyenne par rapport au nombre de cylindre
     """
     )
