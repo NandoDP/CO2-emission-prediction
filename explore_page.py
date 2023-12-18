@@ -24,6 +24,15 @@ def show_explore_page():
     data = df.groupby(["ENGINESIZE"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
     st.line_chart(data, y="CO2EMISSIONS")
 
+    st.write(
+        """
+    #### (C) Quantité CO2 émis en moyenne par rapport à la consommation de carburant
+    """
+    )
+
+    data = df.groupby(["FUELCONSUMPTION_COMB"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
+    st.line_chart(data, y="CO2EMISSIONS")
+
     with st.sidebar.expander("Cliquez pour en savoir plus sur ce tableau de bord"):
         st.markdown("""
         
