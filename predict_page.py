@@ -1,20 +1,14 @@
 import streamlit as st
 import pickle
 import numpy as np
-from sklearn.preprocessing import StandardScaler
 
 
 def load_model_CO2():
     with open('model.sav', 'rb') as file:
         model = pickle.load(file)
     return model
-    # with open('model_test_data.pkl', 'rb') as file:
-    #     model_test_data = pickle.load(file)
-    # return model_test_data
 
 model = load_model_CO2()
-# model_test_data = load_model_CO2()
-# model = model_test_data['model']
 
 def show_predict_page_C02():
     st.title("Prédiction de la quantité de C02 émis par les vehicules.")
@@ -49,12 +43,13 @@ def show_predict_page_C02():
 
 
 def load_model_iphone():
-    with open('model_knn.sav', 'rb') as file:
+    with open('model_knn_std.pkl', 'rb') as file:
         data = pickle.load(file)
     return data
 
-standard = StandardScaler()
 data = load_model_iphone()
+standard = data['standard']
+model_knn = data['model']
 
 def show_predict_page_iphone():
     st.title("Prédiction de l'achat ou non d'iphone par une personne")
@@ -69,21 +64,20 @@ def show_predict_page_iphone():
     if click:
         g = 1 if gender == 'Homme' else 0
         tab = [[0, 16, 15000], [g, age, salary], [1, 60, 150000]]
-        # input_data = np.asarray([g, age, salary]).reshape(1, -1)
-        input_data = np.asarray(tab).reshape(3, -1)
-        input_data = standard.fit_transform(input_data)
-        prediction = data.predict(input_data)
+        input_data = np.asarray([g, age, salary]).reshape(1, -1)
+        input_data = standard.transform(input_data)
+        prediction = model_knn.predict(input_data)
 
-        result = "achète un iphone" if prediction[1]==0 else "n'achète pas d'iphone"
+        result = "achète un iphone" if prediction[0]==0 else "n'achète pas d'iphone"
         st.subheader(f"Cette personne {result}",)
     
     with st.sidebar.expander("A propos du model"):
         st.markdown("""
 
-        Après avoir entrainer trois models de régressions avec les données 
-        (voir Exploration), le model de *régression linéaire de scikit-learn* 
+        Après avoir entrainer trois models de classification avec les données 
+        (voir Exploration), le model de *K-Nearest Neighbours de scikit-learn* 
         semble etre légérement plus performant.
 
-        Il offre le meilleur score **R²** avec la plus petite erreur quadratique moyenne.
+        Il offre le meilleur score **F1** avec le meilleur pourcentage de bonnes prédictions.
 
         """)
