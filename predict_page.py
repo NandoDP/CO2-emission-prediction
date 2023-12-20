@@ -57,9 +57,9 @@ standard = StandardScaler()
 data = load_model_iphone()
 
 def show_predict_page_iphone():
-    st.title("Prédiction de l'achat ou non d'iphone par une personne'")
+    st.title("Prédiction de l'achat ou non d'iphone par une personne")
 
-    st.write("""Quelques informations necessaires sur le vehicule.""")
+    st.write("""Quelques informations necessaires sur la personne.""")
 
     gender = st.selectbox('Homme ou Femme', ('Homme', 'Femme'))
     age = st.slider("L'age de la personne", 16, 80, 20)
