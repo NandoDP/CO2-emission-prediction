@@ -57,7 +57,7 @@ standard = StandardScaler()
 data = load_model_iphone()
 
 def show_predict_page_iphone():
-    st.title("Prédiction de la quantité de C02 émis des vehicules")
+    st.title("Prédiction de l'achat ou non d'iphone par une personne'")
 
     st.write("""Quelques informations necessaires sur le vehicule.""")
 
@@ -69,17 +69,12 @@ def show_predict_page_iphone():
     if click:
         g = 1 if gender == 'Homme' else 0
         tab = [[0, 16, 15000], [g, age, salary], [1, 60, 150000]]
-        input_data = np.asarray(tab).reshape(3, -1)
-        # st.write(f'{input_data}')
         # input_data = np.asarray([g, age, salary]).reshape(1, -1)
+        input_data = np.asarray(tab).reshape(3, -1)
         input_data = standard.fit_transform(input_data)
         prediction = data.predict(input_data)
-        # st.write(f'{input_data}')
-        # st.write(f'{prediction}')
 
         result = "achète un iphone" if prediction[1]==0 else "n'achète pas d'iphone"
-        # result = prediction
-        # st.write(f'{input_data}')
         st.subheader(f"Cette personne {result}",)
     
     with st.sidebar.expander("A propos du model"):
