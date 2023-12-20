@@ -77,7 +77,7 @@ def show_predict_page_iphone():
         # st.write(f'{input_data}')
         # st.write(f'{prediction}')
 
-        result = "possède un iphone" if prediction[1]==0 else "ne possède pas d'iphone"
+        result = "achète un iphone" if prediction[1]==0 else "n'achète pas d'iphone"
         # result = prediction
         # st.write(f'{input_data}')
         st.subheader(f"Cette personne {result}",)
