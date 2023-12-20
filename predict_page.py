@@ -12,7 +12,7 @@ def load_model_CO2():
     #     model_test_data = pickle.load(file)
     # return model_test_data
 
-model = load_model()
+model = load_model_CO2()
 # model_test_data = load_model_CO2()
 # model = model_test_data['model']
 
