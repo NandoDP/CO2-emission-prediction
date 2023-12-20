@@ -5,14 +5,16 @@ from sklearn.preprocessing import StandardScaler
 
 
 def load_model_CO2():
-    # with open('model.sav', 'rb') as file:
-    with open('model_test_data.pkl', 'rb') as file:
-        model_test_data = pickle.load(file)
-    return model_test_data
+    with open('model.sav', 'rb') as file:
+        model = pickle.load(file)
+    return model
+    # with open('model_test_data.pkl', 'rb') as file:
+    #     model_test_data = pickle.load(file)
+    # return model_test_data
 
-# model = load_model()
-model_test_data = load_model_CO2()
-model = model_test_data['model']
+model = load_model()
+# model_test_data = load_model_CO2()
+# model = model_test_data['model']
 
 def show_predict_page_C02():
     st.title("Prédiction de la quantité de C02 émis par les vehicules.")
