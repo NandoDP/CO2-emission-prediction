@@ -1,16 +1,21 @@
 import streamlit as st
 import pickle
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 
-def load_model():
-    with open('model.sav', 'rb') as file:
-        model = pickle.load(file)
-    return model
 
-model = load_model()
+def load_model_CO2():
+    # with open('model.sav', 'rb') as file:
+    with open('model_test_data.pkl', 'rb') as file:
+        model_test_data = pickle.load(file)
+    return model_test_data
 
-def show_predict_page():
-    st.title("Prédiction de la quantité de C02 émis des vehicules")
+# model = load_model()
+model_test_data = load_model_CO2()
+model = model_test_data['model']
+
+def show_predict_page_C02():
+    st.title("Prédiction de la quantité de C02 émis par les vehicules.")
 
     st.write("""Quelques informations necessaires sur le vehicule.""")
 
@@ -24,6 +29,56 @@ def show_predict_page():
         prediction = model.predict(input_data)
 
         st.subheader(f"La quantité de C02 émis par ce vehicule est estimer à {prediction[0]:.2f}")
+    
+    with st.sidebar.expander("A propos du model"):
+        st.markdown("""
+
+        Après avoir entrainer trois models de régressions avec les données 
+        (voir Exploration), le model de *régression linéaire de scikit-learn* 
+        semble etre légérement plus performant.
+
+        Il offre le meilleur score **R²** avec la plus petite erreur quadratique moyenne.
+
+        """)
+
+
+
+
+
+
+def load_model_iphone():
+    with open('model_knn.sav', 'rb') as file:
+        data = pickle.load(file)
+    return data
+
+standard = StandardScaler()
+data = load_model_iphone()
+
+def show_predict_page_iphone():
+    st.title("Prédiction de la quantité de C02 émis des vehicules")
+
+    st.write("""Quelques informations necessaires sur le vehicule.""")
+
+    gender = st.selectbox('Homme ou Femme', ('Homme', 'Femme'))
+    age = st.slider("L'age de la personne", 16, 80, 20)
+    salary = st.slider("Le salaire de la personne", 10000, 350000, 20000)
+
+    click = st.button("Est ce que cette personne possède un iphone ?")
+    if click:
+        g = 1 if gender == 'Homme' else 0
+        tab = [[0, 16, 15000], [g, age, salary], [1, 60, 150000]]
+        input_data = np.asarray(tab).reshape(3, -1)
+        # st.write(f'{input_data}')
+        # input_data = np.asarray([g, age, salary]).reshape(1, -1)
+        input_data = standard.fit_transform(input_data)
+        prediction = data.predict(input_data)
+        # st.write(f'{input_data}')
+        # st.write(f'{prediction}')
+
+        result = "possède un iphone" if prediction[1]==0 else "ne possède pas d'iphone"
+        # result = prediction
+        # st.write(f'{input_data}')
+        st.subheader(f"Cette personne {result}",)
     
     with st.sidebar.expander("A propos du model"):
         st.markdown("""

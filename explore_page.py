@@ -1,10 +1,13 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import pickle
+# from predict_page import model_test_data
 
 df = pd.read_csv("Fuel_Consumption.csv")
 
-def show_explore_page():
+
+def show_explore_page_CO2():
     st.title("Explorer les données d’entrainement.")
 
     st.write(
@@ -17,44 +20,32 @@ def show_explore_page():
     st.write("La description du dataFrame:")
     st.write(df.describe())
 
-def show_vizualisation_page():
-    st.title("Visualiser l'évolution de la quantité de CO2 émis")
+    # Prediction de quelques valeurs des données test
+    with open('model_test_data.pkl', 'rb') as file:
+        model_test_data = pickle.load(file)
+
+    model = model_test_data['model']    
+    x_test = model_test_data['x_test']
+    y_test = model_test_data['y_test']
+    n = 5
+    y_pred_n = model.predict(x_test[:n])
+    st.write(f"""#### Prédiction pour les {n} premières lignes des données test :""")
+    for i in range(n):
+        # st.write(f'{y_pred_n[i]:.2f} -- {y_test[i]}')
+        st.write(f"Ligne  {i+1}:  Prédiction  =  {y_pred_n[i]:.2f}  --  Valeur réelle  =  {y_test[i]}  --  Erreur  =  {abs(y_pred_n[i] - y_test[i]):.2f}")
+
+df_iphone = pd.read_csv("iphone_purchase_records.csv")
+
+def show_explore_page_iphone():
+    st.title("Explorer les données d’entrainement.")
 
     st.write(
         """
-    #### (A) Quantité CO2 émis en moyenne par rapport au nombre de cylindre
+    #### Appercu des données d'entrainement du model
     """
     )
+    st.write(f"Dimensions : {df_iphone.shape}")
+    st.dataframe(df_iphone.head())
+    st.write("La description du dataFrame:")
+    st.write(df_iphone.describe())
 
-    data = df.groupby(["CYLINDERS"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.bar_chart(data, y="CO2EMISSIONS")
-
-    st.write(
-        """
-    #### (B) Quantité CO2 émis en moyenne par rapport à la taille du moteur
-    """
-    )
-
-    data = df.groupby(["ENGINESIZE"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.line_chart(data, y="CO2EMISSIONS")
-
-    st.write(
-        """
-    #### (C) Quantité CO2 émis en moyenne par rapport à la consommation de carburant
-    """
-    )
-
-    data = df.groupby(["FUELCONSUMPTION_COMB"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.line_chart(data, y="CO2EMISSIONS")
-
-    with st.sidebar.expander("Cliquez pour en savoir plus sur ce tableau de bord"):
-        st.markdown("""
-        
-        Ici, dans les graphiques suivants, nous suivront:
-
-        (A) La quantité moyenne de C02 émis par rapport au nombre de cylindre. Et nous constatons,
-        sans surprise, qu'elle est d'autant plus élevé que le nombre de cylindre est grand.
-
-        (B) La quantité moyenne de C02 émis par rapport à la taille du moteur.
-
-        """)
