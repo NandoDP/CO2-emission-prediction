@@ -1,4 +1,8 @@
-## Prédiction de la quantité de C02 émis des vehicules
+## Projet
+
+Deploiment sur *Streamlit* de deux modéls de machine learning dans le cadre d'un projet de fin de semestre en Licence 3 Big Data à [Dakar Institute of Technologie](https://dit.sn/)
+
+## Lien
 
 https://regressionclassificationpredict-ldipafnsspfiwpjba8kjmj.streamlit.app/
 
