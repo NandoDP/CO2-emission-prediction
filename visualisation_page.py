@@ -25,7 +25,7 @@ def show_vizualisation_page_CO2():
     )
 
     data_1 = df.groupby(["ENGINESIZE"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.line_chart(data_1, x="ENGINESIZE", y="CO2EMISSIONS")
+    st.line_chart(data_1, y="CO2EMISSIONS")
 
     st.write(
         """
@@ -34,19 +34,7 @@ def show_vizualisation_page_CO2():
     )
 
     data_2 = df.groupby(["FUELCONSUMPTION_COMB"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.line_chart(data_2, x="FUELCONSUMPTION_COMB", y="CO2EMISSIONS")
-
-    # with st.sidebar.expander("Cliquez pour en savoir plus sur ce tableau de bord"):
-    #     st.markdown("""
-        
-    #     Ici, dans les graphiques suivants, nous suivront:
-
-    #     (A) La quantité moyenne de C02 émis par rapport au nombre de cylindre. Et nous constatons,
-    #     sans surprise, qu'elle est d'autant plus élevé que le nombre de cylindre est grand.
-
-    #     (B) La quantité moyenne de C02 émis par rapport à la taille du moteur.
-
-    #     """)
+    st.line_chart(data_2, y="CO2EMISSIONS")
 
 df_iphone = pd.read_csv("iphone_purchase_records.csv")
 
@@ -60,6 +48,14 @@ def show_vizualisation_page_iphone():
     )
 
     st.bar_chart(df_iphone, x="Gender", y="Purchase Iphone")
+
+    st.write(
+        """
+    #### (B)  Matrice de correlation du model KNN sur les données test.
+    """
+    )
+
+    st.image('output.png', caption='Matrice de correlation')
 
 
     # fig, ax = plt.subplots()
