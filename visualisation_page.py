@@ -36,17 +36,17 @@ def show_vizualisation_page_CO2():
     data = df.groupby(["FUELCONSUMPTION_COMB"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
     st.line_chart(data, y="CO2EMISSIONS")
 
-    with st.sidebar.expander("Cliquez pour en savoir plus sur ce tableau de bord"):
-        st.markdown("""
+    # with st.sidebar.expander("Cliquez pour en savoir plus sur ce tableau de bord"):
+    #     st.markdown("""
         
-        Ici, dans les graphiques suivants, nous suivront:
+    #     Ici, dans les graphiques suivants, nous suivront:
 
-        (A) La quantité moyenne de C02 émis par rapport au nombre de cylindre. Et nous constatons,
-        sans surprise, qu'elle est d'autant plus élevé que le nombre de cylindre est grand.
+    #     (A) La quantité moyenne de C02 émis par rapport au nombre de cylindre. Et nous constatons,
+    #     sans surprise, qu'elle est d'autant plus élevé que le nombre de cylindre est grand.
 
-        (B) La quantité moyenne de C02 émis par rapport à la taille du moteur.
+    #     (B) La quantité moyenne de C02 émis par rapport à la taille du moteur.
 
-        """)
+    #     """)
 
 df_iphone = pd.read_csv("iphone_purchase_records.csv")
 
@@ -60,15 +60,6 @@ def show_vizualisation_page_iphone():
     )
 
     st.bar_chart(df_iphone, x="Gender", y="Purchase Iphone")
-
-    # st.write(
-    #     """
-    # #### (B)  
-    # """
-    # )
-
-    # st.bar_chart(df_iphone, x="Salary", y="Purchase Iphone", hue="Gender")
-
 
 
     # fig, ax = plt.subplots()

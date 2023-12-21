@@ -4,7 +4,6 @@ from explore_page import show_explore_page_CO2, show_explore_page_iphone
 from visualisation_page import show_vizualisation_page_CO2, show_vizualisation_page_iphone
 
 project = st.sidebar.selectbox('Projet', ('CO2', "Iphone"))
-# page = st.sidebar.selectbox('Prédire, explorer ou visualiser', ('Prédiction', 'Exploration', 'Visualisation'))
 page = st.sidebar.radio('Sommaire :', ('Prédiction', 'Exploration', 'Visualisation'))
 
 if project == 'CO2':
