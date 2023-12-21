@@ -24,8 +24,8 @@ def show_vizualisation_page_CO2():
     """
     )
 
-    data = df.groupby(["ENGINESIZE"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.line_chart(data, y="CO2EMISSIONS")
+    data_1 = df.groupby(["ENGINESIZE"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
+    st.line_chart(data_1, x="ENGINESIZE", y="CO2EMISSIONS")
 
     st.write(
         """
@@ -33,8 +33,8 @@ def show_vizualisation_page_CO2():
     """
     )
 
-    data = df.groupby(["FUELCONSUMPTION_COMB"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
-    st.line_chart(data, y="CO2EMISSIONS")
+    data_2 = df.groupby(["FUELCONSUMPTION_COMB"])["CO2EMISSIONS"].mean().sort_values(ascending=True)
+    st.line_chart(data_2, x="FUELCONSUMPTION_COMB", y="CO2EMISSIONS")
 
     # with st.sidebar.expander("Cliquez pour en savoir plus sur ce tableau de bord"):
     #     st.markdown("""
